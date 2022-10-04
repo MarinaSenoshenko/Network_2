@@ -1,0 +1,10 @@
+окт. 04, 2022 10:58:00 PM main.java.server.Server main
+INFO: The server started working
+окт. 04, 2022 10:59:09 PM main.java.server.Server run
+INFO: Server Thread №0: Successfully downloaded testFile with average speed 396274711 bytes per second in 0.419 seconds
+окт. 04, 2022 10:59:09 PM main.java.server.EveryThreeSecondTimer run
+INFO: Server Thread №0: Speed right now is 396274711 bytes per second (166039104 bytes)
+окт. 04, 2022 11:02:31 PM main.java.server.Server run
+INFO: Server Thread №0: Successfully downloaded testFile with average speed 331415377 bytes per second in 0.501 seconds
+окт. 04, 2022 11:02:31 PM main.java.server.EveryThreeSecondTimer run
+INFO: Server Thread №0: Speed right now is 331415377 bytes per second (166039104 bytes)
