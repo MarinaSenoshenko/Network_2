@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class Server implements Runnable {
-	private int thisThreadNumber; 
+    private int thisThreadNumber; 
     private Socket socket;
     private EveryThreeSecondTimer timer;
     private static AtomicInteger globalNumber = new AtomicInteger(-1); 
@@ -49,18 +49,18 @@ public class Server implements Runnable {
         int port = Integer.parseInt(args[0]);
         
         try {
-        	try (ServerSocket serverSocket = new ServerSocket(port)) {
-				logger.log(Level.INFO, "The server started working");
+            try (ServerSocket serverSocket = new ServerSocket(port)) {
+		logger.log(Level.INFO, "The server started working");
       
-				while (!serverSocket.isClosed()) {
-				     Server myServer = new Server(serverSocket.accept());                                     
-				     threadPool.submit(() -> myServer.run());  
-				}
-			}
+		while (!serverSocket.isClosed()) {
+		    Server myServer = new Server(serverSocket.accept());                                     
+		    threadPool.submit(() -> myServer.run());  
+		}
+	    }
         }
         catch (Exception e) {
             logger.log(Level.SEVERE, "Can't receive connections: " + e.getMessage());
-		}    	       
+	}    	       
     }
     
     private long getFileAndSaveTime(InputStream socketIn, FileOutputStream fileStream, long fileSize) throws SocketException, IOException {
@@ -110,8 +110,8 @@ public class Server implements Runnable {
             
             byte msg = 100;
        
-    		socketOut.write(msg);
-    		fileStream.close();
+    	    socketOut.write(msg);
+    	    fileStream.close();
             logger.log(Level.INFO, "Server Thread №" + thisThreadNumber + ": Successfully downloaded " + fileName + " with average speed " + MILLS_TO_SEC * fileSize / time + " bytes per second in " + time / 1000.0 + " seconds");
             
             timer.setLocalTime(time);
@@ -121,7 +121,7 @@ public class Server implements Runnable {
             sceduledThreadPool.shutdown();
         }
         catch (SocketException e) {
-        	sceduledThreadPool.shutdown();
+            sceduledThreadPool.shutdown();
         	
             if (fileStream != null) {
                 try {
@@ -139,11 +139,11 @@ public class Server implements Runnable {
             
         }
         catch (IOException e) {
-        	sceduledThreadPool.shutdown();
+            sceduledThreadPool.shutdown();
             logger.log(Level.SEVERE, "Server Thread №" + thisThreadNumber + ": Connection error: " + e.getMessage());
         }
         finally {
-        	globalNumber.decrementAndGet();
+            globalNumber.decrementAndGet();
         }
     }
 }
