@@ -5,9 +5,9 @@ import java.net.*;
 import java.util.logging.*;
 
 public class Client {	
-	private int port;
-	private String filePath;
-	private InetAddress serverAddr;
+    private int port;
+    private String filePath;
+    private InetAddress serverAddr;
     public final static Logger logger = Logger.getLogger(Client.class.getName());
     
     private static final int CLIENT_ARGS_COUNT = 3;	
@@ -37,8 +37,7 @@ public class Client {
 
         InetAddress serverAddr = null;
         try {
-        	serverAddr = InetAddress.getByName(args[1]);
-        	
+            serverAddr = InetAddress.getByName(args[1]);        	
         }
         catch (UnknownHostException e) {
             logger.log(Level.SEVERE, "Can't recognize host: " + e.getMessage());
