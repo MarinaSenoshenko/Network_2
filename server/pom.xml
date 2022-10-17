@@ -29,7 +29,7 @@
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>libs/</classpathPrefix>
                             <mainClass>
-                                main.java.server.Server
+                                main.java.server.Main
                             </mainClass>
                         </manifest>
                     </archive>
