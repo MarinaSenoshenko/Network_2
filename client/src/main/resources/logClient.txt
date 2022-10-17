@@ -1,0 +1,2 @@
+окт. 04, 2022 11:02:31 PM main.java.client.Client sendFile
+INFO: Successfully sent testFile
