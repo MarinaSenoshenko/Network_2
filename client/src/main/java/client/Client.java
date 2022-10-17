@@ -5,10 +5,10 @@ import java.net.*;
 import java.util.logging.*;
 
 public class Client {	
-	protected Logger logger;
-	private int port;
-	private String filePath;
-	private InetAddress serverAddr;
+    protected Logger logger;
+    private int port;
+    private String filePath;
+    private InetAddress serverAddr;
     
     public Client(Logger logger, String filePath, InetAddress serverAddr, int port) {
     	this.filePath = filePath;
@@ -18,20 +18,19 @@ public class Client {
     	sendFile();
     } 
 
-
-	void sendFile() {
+    private void sendFile() {
     	
-    	File file = new File("src/main/resources" + filePath);    	
+        File file = new File("src/main/resources" + filePath);    	
     	if (!file.isFile()) { 
-    		logger.log(Level.SEVERE, "Can't find the file " + filePath);
-            System.exit(1);
+    	      logger.log(Level.SEVERE, "Can't find the file " + filePath);
+              System.exit(1);
     	}
 
         try (Socket socket = new Socket(serverAddr, port);
-        	 InputStream filestream = Client.class.getResourceAsStream(filePath);
+            InputStream filestream = Client.class.getResourceAsStream(filePath);
         		
              OutputStream socketOut = socket.getOutputStream();
-        	 InputStream socketIn = socket.getInputStream();
+             InputStream socketIn = socket.getInputStream();
         		
              DataOutputStream socketDataOut = new DataOutputStream(socketOut);
              DataInputStream socketDataIn = new DataInputStream(socketIn))
