@@ -10,8 +10,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class Server implements Runnable {
-	protected Logger logger;
-	private int thisThreadNumber; 
+    protected Logger logger;
+    private int thisThreadNumber; 
     private Socket socket;
     private EveryThreeSecondTimer timer;
     private static AtomicInteger globalNumber = new AtomicInteger(-1); 
@@ -29,7 +29,7 @@ public class Server implements Runnable {
     }
 
 
-	private long getFileAndSaveTime(InputStream socketIn, FileOutputStream fileStream, long fileSize) throws SocketException, IOException {
+    private long getFileAndSaveTime(InputStream socketIn, FileOutputStream fileStream, long fileSize) throws SocketException, IOException {
     	long periodStart = System.currentTimeMillis(), start = periodStart ;
         long allCount = 0, speedCount = 0;
         byte[] buf = new byte[8192];
