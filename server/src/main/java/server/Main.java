@@ -11,8 +11,9 @@ import java.util.logging.Logger;
 
 public class Main {
     private final static Logger logger = Logger.getLogger(Main.class.getName());
-    private static final int SERVER_ARGS_COUNT = 1;
     private static ExecutorService threadPool = Executors.newCachedThreadPool();
+   
+    private static final int SERVER_ARGS_COUNT = 1;
 	
 	
     public static void main(String[] args) {	    	
