@@ -5,52 +5,27 @@ import java.net.*;
 import java.util.logging.*;
 
 public class Client {	
-    private int port;
-    private String filePath;
-    private InetAddress serverAddr;
-    public final static Logger logger = Logger.getLogger(Client.class.getName());
+	protected Logger logger;
+	private int port;
+	private String filePath;
+	private InetAddress serverAddr;
     
-    private static final int CLIENT_ARGS_COUNT = 3;	
-    
-    public Client(String filePath, InetAddress serverAddr, int port) {
+    public Client(Logger logger, String filePath, InetAddress serverAddr, int port) {
     	this.filePath = filePath;
     	this.serverAddr = serverAddr;
     	this.port = port;
+    	this.logger = logger;
+    	sendFile();
     } 
-	
-    public static void main(String[] args) {
-    	
-    	 LogManager logManager = LogManager.getLogManager();
-         try {
-             logManager.readConfiguration(new FileInputStream("src/main/resources/logClient.properties"));
-         } catch (IOException ex){
-             logger.log(Level.SEVERE, "Cannot get log configuration!" + ex.getMessage());
-         }
-    	
-    	if (args.length < CLIENT_ARGS_COUNT) {
-            logger.log(Level.SEVERE, "Not enough arguments\nYou should type:\n1)file path\n2)server address\n3)port number");
-            System.exit(1);
-        }    	
-    	
-    	String filePath = args[0];
-        int port = Integer.parseInt(args[2]);
 
-        InetAddress serverAddr = null;
-        try {
-            serverAddr = InetAddress.getByName(args[1]);        	
-        }
-        catch (UnknownHostException e) {
-            logger.log(Level.SEVERE, "Can't recognize host: " + e.getMessage());
-            System.exit(1);
-        }
 
-        Client client = new Client(filePath, serverAddr, port);
-        client.sendFile();
-    }
-    
-    private void sendFile() {
+	void sendFile() {
     	
     	File file = new File("src/main/resources" + filePath);    	
+    	if (!file.isFile()) { 
+    		logger.log(Level.SEVERE, "Can't find the file " + filePath);
+            System.exit(1);
+    	}
 
         try (Socket socket = new Socket(serverAddr, port);
         	 InputStream filestream = Client.class.getResourceAsStream(filePath);
@@ -68,6 +43,7 @@ public class Client {
 
             byte[] buf = new byte[8192];
             int count;
+
             while ((count = filestream.read(buf)) > 0) {
                 socketOut.write(buf, 0, count);
             } 
