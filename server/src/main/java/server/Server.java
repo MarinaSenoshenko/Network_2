@@ -66,10 +66,15 @@ public class Server implements Runnable {
             String fileName = socketDataIn.readUTF();
             long fileSize = socketDataIn.readLong();
             
-            if (new File("uploads/" + fileName).isFile()) {
-            	logger.log(Level.INFO, "This file already exists");
-            	System.exit(0);
+            String fileCounter = "";
+            int fileNumber = 1;
+            
+            while (new File("uploads/" + fileName + fileCounter).isFile()) {
+            	fileCounter = "(" + fileNumber + ")";
+            	fileNumber++;
             }
+            
+            fileName += fileCounter;
 
             downloadedFile = new File("uploads/" + fileName);
             downloadedFile.getParentFile().mkdirs();
